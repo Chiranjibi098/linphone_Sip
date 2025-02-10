@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/assistant_nav_graph"
+    app:startDestination="@id/thirdPartySipAccountLoginFragment">
+
+    <fragment
+        android:id="@+id/thirdPartySipAccountLoginFragment"
+        android:name="org.linphone.ui.assistant.fragment.ThirdPartySipAccountLoginFragment"
+        android:label="ThirdPartySipAccountLoginFragment"
+        tools:layout="@layout/assistant_third_party_sip_account_login_fragment" />
+
+
+</navigation>
