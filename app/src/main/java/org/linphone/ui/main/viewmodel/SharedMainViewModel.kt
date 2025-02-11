@@ -19,15 +19,11 @@
  */
 package org.linphone.ui.main.viewmodel
 
-import android.net.Uri
-import android.os.Bundle
 import androidx.annotation.UiThread
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.linphone.core.ChatRoom
 import org.linphone.core.ConferenceInfo
 import org.linphone.core.Friend
-import org.linphone.ui.main.chat.model.MessageModel
 import org.linphone.ui.main.recordings.model.RecordingModel
 import org.linphone.utils.Event
 
@@ -113,49 +109,7 @@ class SharedMainViewModel
 
     val filesToShareFromIntent = MutableLiveData<ArrayList<String>>()
 
-    val messageToForwardEvent: MutableLiveData<Event<MessageModel>> by lazy {
-        MutableLiveData<Event<MessageModel>>()
-    }
 
-    var displayedChatRoom: ChatRoom? = null // Prevents the need to go look for the chat room
-    val showConversationEvent: MutableLiveData<Event<Pair<String, String>>> by lazy {
-        MutableLiveData<Event<Pair<String, String>>>()
-    }
-
-    val hideConversationEvent: MutableLiveData<Event<Boolean>> by lazy {
-        MutableLiveData<Event<Boolean>>()
-    }
-
-    // When using keyboard to share gif or other, see RichContentReceiver & RichEditText classes
-    val richContentUri = MutableLiveData<Event<Uri>>()
-
-    val displayFileEvent: MutableLiveData<Event<Bundle>> by lazy {
-        MutableLiveData<Event<Bundle>>()
-    }
-
-    val forceRefreshDisplayedConversation: MutableLiveData<Event<Boolean>> by lazy {
-        MutableLiveData<Event<Boolean>>()
-    }
-
-    val forceRefreshConversations: MutableLiveData<Event<Boolean>> by lazy {
-        MutableLiveData<Event<Boolean>>()
-    }
-
-    val forceRefreshConversationInfo: MutableLiveData<Event<Boolean>> by lazy {
-        MutableLiveData<Event<Boolean>>()
-    }
-
-    val forceRefreshConversationEvents: MutableLiveData<Event<Boolean>> by lazy {
-        MutableLiveData<Event<Boolean>>()
-    }
-
-    val newChatMessageEphemeralLifetimeToSet: MutableLiveData<Event<Long>> by lazy {
-        MutableLiveData<Event<Long>>()
-    }
-
-    val updateUnreadMessageCountForCurrentConversationEvent: MutableLiveData<Event<Boolean>> by lazy {
-        MutableLiveData<Event<Boolean>>()
-    }
 
     // Meetings related
 
