@@ -67,7 +67,6 @@ import org.linphone.ui.main.viewmodel.MainViewModel
 import org.linphone.ui.main.viewmodel.SharedMainViewModel
 import org.linphone.utils.AppUtils
 import org.linphone.utils.DialogUtils
-import org.linphone.utils.Event
 import org.linphone.utils.FileUtils
 import org.linphone.utils.LinphoneUtils
 
@@ -513,7 +512,6 @@ class MainActivity : GenericActivity() {
             Log.i(
                 "$TAG Navigating to conversation with local [$localSipUri] and peer [$remoteSipUri] addresses, computed from shortcut ID"
             )
-            sharedViewModel.showConversationEvent.value = Event(pair)
         }
     }
 
@@ -668,7 +666,7 @@ class MainActivity : GenericActivity() {
                 Log.i(
                     "$TAG Navigating to conversation with local [$localSipUri] and peer [$remoteSipUri] addresses, computed from shortcut ID"
                 )
-                sharedViewModel.showConversationEvent.value = Event(pair)
+//                sharedViewModel.showConversationEvent.value = Event(pair)
             }
         }
     }

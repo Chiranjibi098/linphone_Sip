@@ -109,8 +109,6 @@ class SharedMainViewModel
 
     val filesToShareFromIntent = MutableLiveData<ArrayList<String>>()
 
-
-
     // Meetings related
 
     var displayedMeeting: ConferenceInfo? = null // Prevents the need to go look for the conference info

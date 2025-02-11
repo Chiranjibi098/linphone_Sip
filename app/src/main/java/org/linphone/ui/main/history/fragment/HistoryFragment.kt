@@ -150,7 +150,7 @@ class HistoryFragment : SlidingPaneChildFragment() {
         viewModel.goToConversationEvent.observe(viewLifecycleOwner) {
             it.consume { pair ->
                 Log.i("$TAG Going to conversation [${pair.first}][${pair.second}]")
-                sharedViewModel.showConversationEvent.value = Event(pair)
+//                sharedViewModel.showConversationEvent.value = Event(pair)
                 sharedViewModel.navigateToConversationsEvent.value = Event(true)
             }
         }
