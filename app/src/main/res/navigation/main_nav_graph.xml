@@ -30,40 +30,15 @@
             app:launchSingleTop="true" />
     </fragment>
 
-    <fragment
-        android:id="@+id/accountProfileFragment"
-        android:name="org.linphone.ui.main.settings.fragment.AccountProfileFragment"
-        android:label="AccountProfileFragment"
-        tools:layout="@layout/account_profile_fragment">
-        <argument
-            android:name="accountIdentity"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_accountProfileFragment_to_accountProfileModeFragment"
-            app:destination="@id/accountProfileModeFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
-        <action
-            android:id="@+id/action_accountProfileFragment_to_accountSettingsFragment"
-            app:destination="@id/accountSettingsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true" />
-    </fragment>
 
-    <action
-        android:id="@+id/action_global_accountProfileFragment"
-        app:destination="@id/accountProfileFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:launchSingleTop="true" />
+<!--    <action-->
+<!--        android:id="@+id/action_global_accountProfileFragment"-->
+<!--        app:destination="@id/accountProfileFragment"-->
+<!--        app:enterAnim="@anim/slide_in_right"-->
+<!--        app:exitAnim="@anim/slide_out_left"-->
+<!--        app:popEnterAnim="@anim/slide_in_left"-->
+<!--        app:popExitAnim="@anim/slide_out_right"-->
+<!--        app:launchSingleTop="true" />-->
 
     <fragment
         android:id="@+id/settingsFragment"
@@ -86,14 +61,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_settingsFragment_to_settingsAdvancedFragment"
-            app:destination="@id/settingsAdvancedFragment"
-            app:launchSingleTop="true"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+<!--        <action-->
+<!--            android:id="@+id/action_settingsFragment_to_settingsAdvancedFragment"-->
+<!--            app:destination="@id/settingsAdvancedFragment"-->
+<!--            app:launchSingleTop="true"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right" />-->
     </fragment>
 
     <action
@@ -233,11 +208,6 @@
             app:nullable="true" />
     </fragment>
 
-    <fragment
-        android:id="@+id/settingsAdvancedFragment"
-        android:name="org.linphone.ui.main.settings.fragment.SettingsAdvancedFragment"
-        android:label="SettingsAdvancedFragment"
-        tools:layout="@layout/settings_advanced_fragment"/>
 
     <fragment
         android:id="@+id/singleSignOnFragment"

@@ -127,12 +127,12 @@ class SettingsFragment : GenericMainFragment() {
             goBack()
         }
 
-        binding.setAdvancedSettingsClickListener {
-            if (findNavController().currentDestination?.id == R.id.settingsFragment) {
-                val action = SettingsFragmentDirections.actionSettingsFragmentToSettingsAdvancedFragment()
-                findNavController().navigate(action)
-            }
-        }
+//        binding.setAdvancedSettingsClickListener {
+//            if (findNavController().currentDestination?.id == R.id.settingsFragment) {
+//                val action = SettingsFragmentDirections.actionSettingsFragmentToSettingsAdvancedFragment()
+//                findNavController().navigate(action)
+//            }
+//        }
 
         viewModel.recreateActivityEvent.observe(viewLifecycleOwner) {
             it.consume {

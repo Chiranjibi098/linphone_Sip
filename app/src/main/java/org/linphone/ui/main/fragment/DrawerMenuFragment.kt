@@ -44,7 +44,6 @@ import org.linphone.databinding.AccountPopupMenuBinding
 import org.linphone.databinding.DrawerMenuBinding
 import org.linphone.ui.assistant.AssistantActivity
 import org.linphone.ui.main.MainActivity
-import org.linphone.ui.main.settings.fragment.AccountProfileFragmentDirections
 import org.linphone.ui.main.viewmodel.DrawerMenuViewModel
 
 @UiThread
@@ -179,11 +178,7 @@ class DrawerMenuFragment : GenericMainFragment() {
         popupView.setManageProfileClickListener {
             val navController = (requireActivity() as MainActivity).findNavController()
             val identity = account.params.identityAddress?.asStringUriOnly().orEmpty()
-            val action = AccountProfileFragmentDirections.actionGlobalAccountProfileFragment(
-                identity
-            )
-            Log.i("$TAG Going to account [$identity] profile")
-            navController.navigate(action)
+
             popupWindow.dismiss()
             (requireActivity() as MainActivity).closeDrawerMenu()
         }
