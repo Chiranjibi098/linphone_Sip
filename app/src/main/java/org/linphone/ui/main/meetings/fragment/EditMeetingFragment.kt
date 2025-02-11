@@ -163,11 +163,7 @@ class EditMeetingFragment : SlidingPaneChildFragment() {
                     selection.add(participant.address.asStringUriOnly())
                 }
                 Log.i("$TAG [${selection.size}] participants are already selected, keeping them")
-                val action =
-                    EditMeetingFragmentDirections.actionEditMeetingFragmentToAddParticipantsFragment(
-                        selection.toTypedArray()
-                    )
-                findNavController().navigate(action)
+
             }
         }
 

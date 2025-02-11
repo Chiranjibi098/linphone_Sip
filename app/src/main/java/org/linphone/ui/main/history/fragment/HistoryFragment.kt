@@ -161,12 +161,7 @@ class HistoryFragment : SlidingPaneChildFragment() {
                 val remoteAddress = pair.second
                 if (findNavController().currentDestination?.id == R.id.historyFragment) {
                     Log.i("$TAG Going to meeting conversation [$localAddress][$remoteAddress]")
-                    val action =
-                        HistoryFragmentDirections.actionHistoryFragmentToConferenceConversationFragment(
-                            localAddress,
-                            remoteAddress
-                        )
-                    findNavController().navigate(action)
+
                 }
             }
         }

@@ -83,7 +83,7 @@ class ActiveCallFragment : GenericCallFragment() {
             }
         }
 
-        override fun onSlide(bottomSheet: View, slideOffset: Float) { }
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {}
     }
 
     private val backPressedCallback = object : OnBackPressedCallback(true) {
@@ -129,10 +129,11 @@ class ActiveCallFragment : GenericCallFragment() {
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
         return when (findNavController().currentDestination?.id) {
-            R.id.newCallFragment, R.id.callsListFragment, R.id.transferCallFragment, R.id.inCallConversationFragment -> {
+            R.id.newCallFragment, R.id.callsListFragment, R.id.transferCallFragment -> {
                 // Holds fragment in place while new fragment slides over it
                 AnimationUtils.loadAnimation(activity, R.anim.hold)
             }
+
             else -> {
                 super.onCreateAnimation(transit, enter, nextAnim)
             }
@@ -376,12 +377,7 @@ class ActiveCallFragment : GenericCallFragment() {
                     Log.i(
                         "$TAG Display conversation with local SIP URI [$localSipUri] and remote SIP URI [$remoteSipUri]"
                     )
-                    val action =
-                        ActiveCallFragmentDirections.actionActiveCallFragmentToInCallConversationFragment(
-                            localSipUri,
-                            remoteSipUri
-                        )
-                    findNavController().navigate(action)
+
                 }
             }
         }

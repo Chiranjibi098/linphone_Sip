@@ -122,17 +122,8 @@
 
         </activity>
 
-        <activity
-            android:name=".ui.fileviewer.MediaViewerActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true" />
 
-        <activity
-            android:name=".ui.fileviewer.FileViewerActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true" />
+
 
         <activity
             android:name=".ui.welcome.WelcomeActivity"

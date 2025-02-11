@@ -62,8 +62,6 @@ import org.linphone.core.tools.Log
 import org.linphone.databinding.MainActivityBinding
 import org.linphone.ui.GenericActivity
 import org.linphone.ui.assistant.AssistantActivity
-import org.linphone.ui.main.chat.fragment.ConversationsListFragmentDirections
-import org.linphone.ui.main.help.fragment.DebugFragmentDirections
 import org.linphone.utils.PasswordDialogModel
 import org.linphone.ui.main.viewmodel.MainViewModel
 import org.linphone.ui.main.viewmodel.SharedMainViewModel
@@ -344,16 +342,9 @@ class MainActivity : GenericActivity() {
         currentlyDisplayedAuthDialog = null
 
         val defaultFragmentId = when (sharedViewModel.currentlyDisplayedFragment.value) {
-            R.id.contactsListFragment -> {
-                CONTACTS_FRAGMENT_ID
-            }
 
             R.id.historyListFragment -> {
                 HISTORY_FRAGMENT_ID
-            }
-
-            R.id.conversationsListFragment -> {
-                CHAT_FRAGMENT_ID
             }
 
             R.id.meetingsListFragment -> {
@@ -444,20 +435,7 @@ class MainActivity : GenericActivity() {
                 when (defaultFragmentId) {
                     CONTACTS_FRAGMENT_ID -> {
                         findNavController().addOnDestinationChangedListener(destinationListener)
-                        findNavController().navigate(
-                            R.id.contactsListFragment,
-                            args,
-                            navOptions
-                        )
-                    }
 
-                    CHAT_FRAGMENT_ID -> {
-                        findNavController().addOnDestinationChangedListener(destinationListener)
-                        findNavController().navigate(
-                            R.id.conversationsListFragment,
-                            args,
-                            navOptions
-                        )
                     }
 
                     MEETINGS_FRAGMENT_ID -> {
@@ -651,16 +629,6 @@ class MainActivity : GenericActivity() {
                 Log.i("$TAG Drawer menu is opened, closing it")
                 closeDrawerMenu()
             }
-            if (findNavController().currentDestination?.id == R.id.conversationsListFragment) {
-                if (sharedViewModel.displayedChatRoom != null) {
-                    Log.w(
-                        "$TAG Closing already opened conversation to prevent attaching file in it directly"
-                    )
-                    sharedViewModel.hideConversationEvent.value = Event(true)
-                } else {
-                    Log.i("$TAG No chat room currently displayed, nothing to close")
-                }
-            }
 
             val paths = deferred.awaitAll()
             for (path in paths) {
@@ -678,41 +646,29 @@ class MainActivity : GenericActivity() {
                 }
             }
 
-            if (findNavController().currentDestination?.id == R.id.debugFragment) {
+//            if (findNavController().currentDestination?.id == R.id.debugFragment) {
+//                Log.i(
+//                    "$TAG App is already started and in debug fragment, navigating to conversations list"
+//                )
+//                val pair = parseShortcutIfAny(intent)
+//                if (pair != null) {
+//                    Log.i(
+//                        "$TAG Navigating from debug to conversation with local [${pair.first}] and peer [${pair.second}] addresses, computed from shortcut ID"
+//                    )
+//                    sharedViewModel.showConversationEvent.value = Event(pair)
+//                }
+//
+//            } else {
+//
+//            }
+            val pair = parseShortcutIfAny(intent)
+            if (pair != null) {
+                val localSipUri = pair.first
+                val remoteSipUri = pair.second
                 Log.i(
-                    "$TAG App is already started and in debug fragment, navigating to conversations list"
+                    "$TAG Navigating to conversation with local [$localSipUri] and peer [$remoteSipUri] addresses, computed from shortcut ID"
                 )
-                val pair = parseShortcutIfAny(intent)
-                if (pair != null) {
-                    Log.i(
-                        "$TAG Navigating from debug to conversation with local [${pair.first}] and peer [${pair.second}] addresses, computed from shortcut ID"
-                    )
-                    sharedViewModel.showConversationEvent.value = Event(pair)
-                }
-
-                val action =
-                    DebugFragmentDirections.actionDebugFragmentToConversationsListFragment()
-                findNavController().navigate(action)
-            } else {
-                val pair = parseShortcutIfAny(intent)
-                if (pair != null) {
-                    val localSipUri = pair.first
-                    val remoteSipUri = pair.second
-                    Log.i(
-                        "$TAG Navigating to conversation with local [$localSipUri] and peer [$remoteSipUri] addresses, computed from shortcut ID"
-                    )
-                    sharedViewModel.showConversationEvent.value = Event(pair)
-                }
-
-                if (findNavController().currentDestination?.id == R.id.conversationsListFragment) {
-                    Log.w(
-                        "$TAG Current destination is already conversations list, skipping navigation"
-                    )
-                } else {
-                    val action =
-                        ConversationsListFragmentDirections.actionGlobalConversationsListFragment()
-                    findNavController().navigate(action)
-                }
+                sharedViewModel.showConversationEvent.value = Event(pair)
             }
         }
     }

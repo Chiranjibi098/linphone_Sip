@@ -135,7 +135,8 @@ class CallActivity : GenericActivity() {
         setUpToastsArea(binding.toastsArea)
 
         val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
-        windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.otherCallsTopBar.root) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -245,7 +246,11 @@ class CallActivity : GenericActivity() {
 
         callViewModel.requestRecordAudioPermission.observe(this) {
             it.consume {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        this,
+                        Manifest.permission.RECORD_AUDIO
+                    )
+                ) {
                     Log.w("$TAG Asking for RECORD_AUDIO permission")
                     requestRecordAudioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
                 } else {
@@ -257,7 +262,11 @@ class CallActivity : GenericActivity() {
 
         callViewModel.requestCameraPermission.observe(this) {
             it.consume {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        this,
+                        Manifest.permission.CAMERA
+                    )
+                ) {
                     Log.w("$TAG Asking for CAMERA permission")
                     requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
                 } else {
@@ -333,11 +342,8 @@ class CallActivity : GenericActivity() {
         super.onStart()
 
         findNavController(R.id.call_nav_container).addOnDestinationChangedListener { _, destination, _ ->
-            val showTopBar = when (destination.id) {
-                R.id.inCallConversationFragment, R.id.transferCallFragment, R.id.newCallFragment -> true
-                else -> false
-            }
-            callsViewModel.showTopBar.postValue(showTopBar)
+
+            callsViewModel.showTopBar.postValue(true)
         }
 
         if (ActivityCompat.checkSelfPermission(
@@ -471,6 +477,7 @@ class CallActivity : GenericActivity() {
                     OutgoingCallFragmentDirections.actionOutgoingCallFragmentToActiveConferenceCallFragment()
                 }
             }
+
             R.id.incomingCallFragment -> {
                 if (notInConference) {
                     Log.i("$TAG Going from incoming call fragment to call fragment")
@@ -482,6 +489,7 @@ class CallActivity : GenericActivity() {
                     IncomingCallFragmentDirections.actionIncomingCallFragmentToActiveConferenceCallFragment()
                 }
             }
+
             R.id.activeCallFragment -> {
                 if (notInConference) {
                     Log.i("$TAG Going from call fragment to call fragment")
@@ -491,6 +499,7 @@ class CallActivity : GenericActivity() {
                     ActiveCallFragmentDirections.actionActiveCallFragmentToActiveConferenceCallFragment()
                 }
             }
+
             R.id.activeConferenceCallFragment -> {
                 if (notInConference) {
                     Log.i("$TAG Going from conference call fragment to call fragment")
@@ -502,6 +511,7 @@ class CallActivity : GenericActivity() {
                     ActiveConferenceCallFragmentDirections.actionGlobalActiveConferenceCallFragment()
                 }
             }
+
             R.id.callsListFragment -> {
                 if (notInConference) {
                     Log.i("$TAG Going calls list fragment to active call fragment")
@@ -511,6 +521,7 @@ class CallActivity : GenericActivity() {
                     CallsListFragmentDirections.actionCallsListFragmentToActiveConferenceCallFragment()
                 }
             }
+
             else -> {
                 if (notInConference) {
                     Log.i("$TAG Going from call fragment to call fragment")

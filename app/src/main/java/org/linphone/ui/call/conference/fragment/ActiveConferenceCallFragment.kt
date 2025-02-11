@@ -231,12 +231,6 @@ class ActiveConferenceCallFragment : GenericCallFragment() {
                     Log.i(
                         "$TAG Display conversation with local SIP URI [$localSipUri] and remote SIP URI [$remoteSipUri]"
                     )
-                    val action =
-                        ActiveConferenceCallFragmentDirections.actionActiveConferenceCallFragmentToInCallConversationFragment(
-                            localSipUri,
-                            remoteSipUri
-                        )
-                    findNavController().navigate(action)
                 }
             }
         }

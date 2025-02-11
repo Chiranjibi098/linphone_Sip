@@ -25,10 +25,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.UiThread
-import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import org.linphone.core.Address
 import org.linphone.core.Friend
 import org.linphone.core.tools.Log
@@ -45,8 +43,6 @@ class AddParticipantsFragment : GenericAddressPickerFragment() {
     private lateinit var binding: GenericAddParticipantsFragmentBinding
 
     override lateinit var viewModel: AddParticipantsViewModel
-
-    private val args: AddParticipantsFragmentArgs by navArgs()
 
     private val onBackPressedCallback = object : OnBackPressedCallback(false) {
         override fun handleOnBackPressed() {
@@ -115,26 +111,6 @@ class AddParticipantsFragment : GenericAddressPickerFragment() {
         }
 
         setupRecyclerView(binding.contactsList)
-
-        val participants = args.selectedParticipants
-
-        viewModel.modelsList.observe(
-            viewLifecycleOwner
-        ) {
-            if (!participants.isNullOrEmpty() && viewModel.isSelectionEmpty()) {
-                Log.i("$TAG Found participants in arguments and selection is currently empty, adding them")
-                viewModel.addSelectedParticipants(participants)
-            }
-
-            Log.i("$TAG Contacts & suggestions list is ready with [${it.size}] items")
-            adapter.submitList(it)
-
-            attachAdapter()
-
-            (view.parent as? ViewGroup)?.doOnPreDraw {
-                startPostponedEnterTransition()
-            }
-        }
 
         viewModel.selectedSipUrisEvent.observe(viewLifecycleOwner) {
             it.consume { list ->

@@ -84,12 +84,6 @@
             app:popUpTo="@id/activeCallFragment"
             app:popUpToInclusive="true"
             app:launchSingleTop="true" />
-        <action
-            android:id="@+id/action_activeCallFragment_to_inCallConversationFragment"
-            app:destination="@id/inCallConversationFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
     </fragment>
 
     <action android:id="@+id/action_global_activeCallFragment"
@@ -158,12 +152,6 @@
             app:enterAnim="@anim/slide_in"
             app:popExitAnim="@anim/slide_out"
             app:launchSingleTop="true" />
-        <action
-            android:id="@+id/action_activeConferenceCallFragment_to_inCallConversationFragment"
-            app:destination="@id/inCallConversationFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
     </fragment>
 
     <action android:id="@+id/action_global_activeConferenceCallFragment"
@@ -183,19 +171,6 @@
             app:enterAnim="@anim/slide_in"
             app:popExitAnim="@anim/slide_out"
             app:launchSingleTop="true" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/inCallConversationFragment"
-        android:name="org.linphone.ui.call.fragment.ConversationFragment"
-        android:label="ConversationFragment"
-        tools:layout="@layout/chat_conversation_fragment">
-        <argument
-            android:name="localSipUri"
-            app:argType="string" />
-        <argument
-            android:name="remoteSipUri"
-            app:argType="string" />
     </fragment>
 
     <fragment

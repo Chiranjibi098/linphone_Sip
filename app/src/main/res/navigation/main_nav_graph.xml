@@ -6,53 +6,10 @@
     app:startDestination="@id/historyListFragment">
 
     <fragment
-        android:id="@+id/contactsListFragment"
-        android:name="org.linphone.ui.main.contacts.fragment.ContactsListFragment"
-        android:label="ContactsListFragment"
-        tools:layout="@layout/contacts_list_fragment">
-        <action
-            android:id="@+id/action_contactsListFragment_to_historyListFragment"
-            app:destination="@id/historyListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/contactsListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_contactsListFragment_to_conversationsListFragment"
-            app:destination="@id/conversationsListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/contactsListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_contactsListFragment_to_meetingsListFragment"
-            app:destination="@id/meetingsListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/contactsListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_contactsListFragment_to_newContactFragment"
-            app:destination="@id/newContactFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
-    </fragment>
-
-    <fragment
         android:id="@+id/historyListFragment"
         android:name="org.linphone.ui.main.history.fragment.HistoryListFragment"
         android:label="HistoryListFragment"
         tools:layout="@layout/history_list_fragment">
-        <action
-            android:id="@+id/action_historyListFragment_to_contactsListFragment"
-            app:destination="@id/contactsListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/historyListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_historyListFragment_to_conversationsListFragment"
-            app:destination="@id/conversationsListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/historyListFragment"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_historyListFragment_to_meetingsListFragment"
             app:destination="@id/meetingsListFragment"
@@ -149,30 +106,6 @@
         app:launchSingleTop="true"/>
 
     <fragment
-        android:id="@+id/helpFragment"
-        android:name="org.linphone.ui.main.help.fragment.HelpFragment"
-        android:label="HelpFragment"
-        tools:layout="@layout/help_fragment" >
-        <action
-            android:id="@+id/action_helpFragment_to_debugFragment"
-            app:destination="@id/debugFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true" />
-    </fragment>
-
-    <action
-        android:id="@+id/action_global_helpFragment"
-        app:destination="@id/helpFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:launchSingleTop="true"/>
-
-    <fragment
         android:id="@+id/recordingsListFragment"
         android:name="org.linphone.ui.main.recordings.fragment.RecordingsListFragment"
         android:label="RecordingsListFragment"
@@ -217,19 +150,6 @@
         tools:layout="@layout/account_profile_secure_mode_fragment"/>
 
     <fragment
-        android:id="@+id/debugFragment"
-        android:name="org.linphone.ui.main.help.fragment.DebugFragment"
-        android:label="DebugFragment"
-        tools:layout="@layout/help_debug_fragment" >
-        <action
-            android:id="@+id/action_debugFragment_to_conversationsListFragment"
-            app:destination="@id/conversationsListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/helpFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
-
-    <fragment
         android:id="@+id/accountSettingsFragment"
         android:name="org.linphone.ui.main.settings.fragment.AccountSettingsFragment"
         android:label="AccountSettingsFragment"
@@ -240,55 +160,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/conversationsListFragment"
-        android:name="org.linphone.ui.main.chat.fragment.ConversationsListFragment"
-        android:label="ConversationsListFragment"
-        tools:layout="@layout/chat_list_fragment" >
-        <action
-            android:id="@+id/action_conversationsListFragment_to_historyListFragment"
-            app:destination="@id/historyListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/conversationsListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_conversationsListFragment_to_contactsListFragment"
-            app:destination="@id/contactsListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/conversationsListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_conversationsListFragment_to_meetingsListFragment"
-            app:destination="@id/meetingsListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/conversationsListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_conversationsListFragment_to_startConversationFragment"
-            app:destination="@id/startConversationFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
-        <action
-            android:id="@+id/action_conversationsListFragment_to_meetingWaitingRoomFragment"
-            app:destination="@id/meetingWaitingRoomFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
-        <action
-            android:id="@+id/action_conversationsListFragment_to_accountProfileFragment"
-            app:destination="@id/accountProfileFragment"
-            app:launchSingleTop="true"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/startConversationFragment"
-        android:name="org.linphone.ui.main.chat.fragment.StartConversationFragment"
-        android:label="StartConversationFragment"
-        tools:layout="@layout/start_chat_fragment"/>
-
-    <fragment
         android:id="@+id/meetingsListFragment"
         android:name="org.linphone.ui.main.meetings.fragment.MeetingsListFragment"
         android:label="MeetingsListFragment"
@@ -296,18 +167,6 @@
         <action
             android:id="@+id/action_meetingsListFragment_to_historyListFragment"
             app:destination="@id/historyListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/meetingsListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_meetingsListFragment_to_conversationsListFragment"
-            app:destination="@id/conversationsListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/meetingsListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_meetingsListFragment_to_contactsListFragment"
-            app:destination="@id/contactsListFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/meetingsListFragment"
             app:popUpToInclusive="true" />
@@ -330,13 +189,6 @@
         android:name="org.linphone.ui.main.meetings.fragment.ScheduleMeetingFragment"
         android:label="ScheduleMeetingFragment"
         tools:layout="@layout/meeting_schedule_fragment">
-        <action
-            android:id="@+id/action_scheduleMeetingFragment_to_addParticipantsFragment"
-            app:destination="@id/addParticipantsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="subject"
             app:argType="string"
@@ -348,24 +200,6 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
-
-    <fragment
-        android:id="@+id/addParticipantsFragment"
-        android:name="org.linphone.ui.main.fragment.AddParticipantsFragment"
-        android:label="AddParticipantsFragment"
-        tools:layout="@layout/generic_add_participants_fragment">
-        <argument
-            android:name="selectedParticipants"
-            app:argType="string[]"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
-
-    <action android:id="@+id/action_global_conversationsListFragment"
-        app:destination="@id/conversationsListFragment"
-        app:launchSingleTop="true"
-        app:popUpTo="@id/contactsListFragment"
-        app:popUpToInclusive="true"/>
 
     <fragment
         android:id="@+id/meetingWaitingRoomFragment"
