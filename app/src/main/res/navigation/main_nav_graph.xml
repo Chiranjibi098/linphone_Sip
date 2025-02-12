@@ -3,101 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/settingsFragment">
+    app:startDestination="@id/meetingsListFragment">
 
-    <fragment
-        android:id="@+id/accountProfileFragment"
-        android:name="org.linphone.ui.main.settings.fragment.AccountProfileFragment"
-        android:label="AccountProfileFragment"
-        tools:layout="@layout/account_profile_fragment">
-        <argument
-            android:name="accountIdentity"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_accountProfileFragment_to_accountProfileModeFragment"
-            app:destination="@id/accountProfileModeFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_accountProfileFragment_to_accountSettingsFragment"
-            app:destination="@id/accountSettingsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-
-    <action
-        android:id="@+id/action_global_accountProfileFragment"
-        app:destination="@id/accountProfileFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:launchSingleTop="true"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
-
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="org.linphone.ui.main.settings.fragment.SettingsFragment"
-        android:label="SettingsFragment"
-        tools:layout="@layout/settings_fragment">
-        <action
-            android:id="@+id/action_settingsFragment_to_ldapServerConfigurationFragment"
-            app:destination="@id/ldapServerConfigurationFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_settingsFragment_to_cardDavAddressBookConfigurationFragment"
-            app:destination="@id/cardDavAddressBookConfigurationFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_settingsFragment_to_settingsAdvancedFragment"
-            app:destination="@id/settingsAdvancedFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-
-    <action
-        android:id="@+id/action_global_settingsFragment"
-        app:destination="@id/settingsFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:launchSingleTop="true"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
-
-
-
-
-    <fragment
-        android:id="@+id/accountProfileModeFragment"
-        android:name="org.linphone.ui.main.settings.fragment.AccountProfileModeFragment"
-        android:label="AccountProfileModeFragment"
-        tools:layout="@layout/account_profile_secure_mode_fragment" />
-
-    <fragment
-        android:id="@+id/accountSettingsFragment"
-        android:name="org.linphone.ui.main.settings.fragment.AccountSettingsFragment"
-        android:label="AccountSettingsFragment"
-        tools:layout="@layout/account_settings_fragment">
-        <argument
-            android:name="accountIdentity"
-            app:argType="string" />
-    </fragment>
 
     <fragment
         android:id="@+id/meetingsListFragment"
@@ -144,34 +51,6 @@
             android:name="conferenceUri"
             app:argType="string" />
     </fragment>
-
-    <fragment
-        android:id="@+id/ldapServerConfigurationFragment"
-        android:name="org.linphone.ui.main.settings.fragment.LdapServerConfigurationFragment"
-        android:label="LdapServerConfigurationFragment"
-        tools:layout="@layout/settings_contacts_ldap">
-        <argument
-            android:name="serverUrl"
-            app:argType="string"
-            app:nullable="true" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/cardDavAddressBookConfigurationFragment"
-        android:name="org.linphone.ui.main.settings.fragment.CardDavAddressBookConfigurationFragment"
-        android:label="CardDavAddressBookConfigurationFragment"
-        tools:layout="@layout/settings_contacts_carddav">
-        <argument
-            android:name="displayName"
-            app:argType="string"
-            app:nullable="true" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/settingsAdvancedFragment"
-        android:name="org.linphone.ui.main.settings.fragment.SettingsAdvancedFragment"
-        android:label="SettingsAdvancedFragment"
-        tools:layout="@layout/settings_advanced_fragment" />
 
 
 </navigation>
