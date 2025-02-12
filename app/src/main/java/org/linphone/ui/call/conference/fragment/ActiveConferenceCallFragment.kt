@@ -74,7 +74,7 @@ class ActiveConferenceCallFragment : GenericCallFragment() {
             }
         }
 
-        override fun onSlide(bottomSheet: View, slideOffset: Float) { }
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {}
     }
 
     private val backPressedCallback = object : OnBackPressedCallback(true) {
@@ -134,7 +134,6 @@ class ActiveConferenceCallFragment : GenericCallFragment() {
         binding.viewModel = callViewModel
         binding.conferenceViewModel = callViewModel.conferenceModel
         binding.callsViewModel = callsViewModel
-        binding.numpadModel = callViewModel.numpadModel
 
         sharedViewModel.foldingState.observe(viewLifecycleOwner) { feature ->
             updateHingeRelatedConstraints(feature)
@@ -273,7 +272,8 @@ class ActiveConferenceCallFragment : GenericCallFragment() {
             if (sipUri.isNotEmpty()) {
                 Log.i("$TAG Sharing conference SIP URI [$sipUri]")
 
-                val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clipboard =
+                    requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val label = "Conference SIP address"
                 clipboard.setPrimaryClip(ClipData.newPlainText(label, sipUri))
             }

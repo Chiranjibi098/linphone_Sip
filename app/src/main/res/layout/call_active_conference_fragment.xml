@@ -33,9 +33,7 @@
         <variable
             name="callsViewModel"
             type="org.linphone.ui.call.viewmodel.CallsViewModel" />
-        <variable
-            name="numpadModel"
-            type="org.linphone.ui.main.history.model.NumpadModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

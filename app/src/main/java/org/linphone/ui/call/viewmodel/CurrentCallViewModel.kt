@@ -58,15 +58,14 @@ import org.linphone.ui.call.model.AudioDeviceModel
 import org.linphone.ui.call.model.CallMediaEncryptionModel
 import org.linphone.ui.call.model.CallStatsModel
 import org.linphone.ui.main.contacts.model.ContactAvatarModel
-import org.linphone.ui.main.history.model.NumpadModel
 import org.linphone.utils.AppUtils
 import org.linphone.utils.AudioUtils
 import org.linphone.utils.Event
 import org.linphone.utils.LinphoneUtils
 
 class CurrentCallViewModel
-    @UiThread
-    constructor() : GenericViewModel() {
+@UiThread
+constructor() : GenericViewModel() {
     companion object {
         private const val TAG = "[Current Call ViewModel]"
     }
@@ -237,8 +236,6 @@ class CurrentCallViewModel
         MutableLiveData<Event<Boolean>>()
     }
 
-    val numpadModel: NumpadModel
-
     val appendDigitToSearchBarEvent: MutableLiveData<Event<String>> by lazy {
         MutableLiveData<Event<String>>()
     }
@@ -367,6 +364,7 @@ class CurrentCallViewModel
                         MediaEncryption.SRTP, MediaEncryption.None -> {
                             updateEncryption()
                         }
+
                         else -> {}
                     }
                 }
@@ -513,7 +511,8 @@ class CurrentCallViewModel
                 if (isSendingVideo.value == true || isReceivingVideo.value == true) {
                     proximitySensorEnabled.postValue(false)
                 } else {
-                    val outputAudioDevice = currentCall.outputAudioDevice ?: coreContext.core.outputAudioDevice
+                    val outputAudioDevice =
+                        currentCall.outputAudioDevice ?: coreContext.core.outputAudioDevice
                     if (outputAudioDevice != null && outputAudioDevice.type == AudioDevice.Type.Earpiece) {
                         proximitySensorEnabled.postValue(true)
                     } else {
@@ -550,28 +549,6 @@ class CurrentCallViewModel
                 Log.e("$TAG Failed to find call!")
             }
         }
-
-        numpadModel = NumpadModel(
-            true,
-            { digit -> // onDigitClicked
-                appendDigitToSearchBarEvent.value = Event(digit)
-                coreContext.postOnCoreThread {
-                    if (::currentCall.isInitialized) {
-                        Log.i("$TAG Sending DTMF [${digit.first()}]")
-                        currentCall.sendDtmf(digit.first())
-                    }
-                }
-            },
-            { // onVoicemailClicked
-            },
-            { // OnBackspaceClicked
-                removedCharacterAtCurrentPositionEvent.value = Event(true)
-            },
-            { // OnCallClicked
-            },
-            { // OnClearInput
-            }
-        )
 
         updateCallQualityIcon()
     }
@@ -716,31 +693,38 @@ class CurrentCallViewModel
                     AudioDevice.Type.Earpiece -> {
                         AppUtils.getString(R.string.call_audio_device_type_earpiece)
                     }
+
                     AudioDevice.Type.Speaker -> {
                         AppUtils.getString(R.string.call_audio_device_type_speaker)
                     }
+
                     AudioDevice.Type.Headset -> {
                         AppUtils.getString(R.string.call_audio_device_type_headset)
                     }
+
                     AudioDevice.Type.Headphones -> {
                         AppUtils.getString(R.string.call_audio_device_type_headphones)
                     }
+
                     AudioDevice.Type.Bluetooth -> {
                         AppUtils.getFormattedString(
                             R.string.call_audio_device_type_bluetooth,
                             device.deviceName
                         )
                     }
+
                     AudioDevice.Type.HearingAid -> {
                         AppUtils.getFormattedString(
                             R.string.call_audio_device_type_hearing_aid,
                             device.deviceName
                         )
                     }
+
                     else -> device.deviceName
                 }
                 val currentDevice = currentCall.outputAudioDevice
-                val isCurrentlyInUse = device.type == currentDevice?.type && device.deviceName == currentDevice.deviceName
+                val isCurrentlyInUse =
+                    device.type == currentDevice?.type && device.deviceName == currentDevice!!.deviceName
                 val model = AudioDeviceModel(device, name, device.type, isCurrentlyInUse, true) {
                     // onSelected
                     coreContext.postOnCoreThread {
@@ -750,12 +734,15 @@ class CurrentCallViewModel
                                 AudioDevice.Type.Headset, AudioDevice.Type.Headphones -> AudioUtils.routeAudioToHeadset(
                                     currentCall
                                 )
+
                                 AudioDevice.Type.Bluetooth, AudioDevice.Type.HearingAid -> AudioUtils.routeAudioToBluetooth(
                                     currentCall
                                 )
+
                                 AudioDevice.Type.Speaker -> AudioUtils.routeAudioToSpeaker(
                                     currentCall
                                 )
+
                                 else -> AudioUtils.routeAudioToEarpiece(currentCall)
                             }
                         }
@@ -818,7 +805,8 @@ class CurrentCallViewModel
                         }
                     }
 
-                    val sendingVideo = params?.videoDirection == MediaDirection.SendRecv || params?.videoDirection == MediaDirection.SendOnly
+                    val sendingVideo =
+                        params?.videoDirection == MediaDirection.SendRecv || params?.videoDirection == MediaDirection.SendOnly
                     conferenceModel.localVideoStreamToggled(sendingVideo)
                 } else if (params != null) {
                     params.isVideoEnabled = true
@@ -921,7 +909,7 @@ class CurrentCallViewModel
                 if (existingConversation != null) {
                     Log.i(
                         "$TAG Found existing conversation [${
-                        LinphoneUtils.getChatRoomId(existingConversation)
+                            LinphoneUtils.getChatRoomId(existingConversation)
                         }], going to it"
                     )
                     goToConversationEvent.postValue(
@@ -1030,11 +1018,13 @@ class CurrentCallViewModel
                     }
                 }
             }
+
             MediaEncryption.SRTP, MediaEncryption.DTLS -> {
                 Log.i("$TAG Current call media encryption is [$mediaEncryption]")
                 isMediaEncrypted.postValue(true)
                 isZrtp.postValue(false)
             }
+
             else -> {
                 Log.w("$TAG Current call doesn't have any media encryption!")
                 isMediaEncrypted.postValue(false)
@@ -1077,7 +1067,8 @@ class CurrentCallViewModel
         }
 
         if (call.dir == Call.Dir.Incoming) {
-            val isVideo = call.remoteParams?.isVideoEnabled == true && call.remoteParams?.videoDirection != MediaDirection.Inactive
+            val isVideo =
+                call.remoteParams?.isVideoEnabled == true && call.remoteParams?.videoDirection != MediaDirection.Inactive
             if (call.core.accountList.size > 1) {
                 val displayName = LinphoneUtils.getDisplayName(call.toAddress)
                 if (isVideo) {
@@ -1240,7 +1231,8 @@ class CurrentCallViewModel
         }
 
         val isSending = direction == MediaDirection.SendRecv || direction == MediaDirection.SendOnly
-        val isReceiving = direction == MediaDirection.SendRecv || direction == MediaDirection.RecvOnly
+        val isReceiving =
+            direction == MediaDirection.SendRecv || direction == MediaDirection.RecvOnly
 
         val wasSending = isSendingVideo.value == true
         val wasReceiving = isReceivingVideo.value == true
@@ -1297,7 +1289,8 @@ class CurrentCallViewModel
 
     @WorkerThread
     private fun updateAvatarModelSecurityLevel(trusted: Boolean) {
-        val securityLevel = if (trusted) SecurityLevel.EndToEndEncryptedAndVerified else SecurityLevel.EndToEndEncrypted
+        val securityLevel =
+            if (trusted) SecurityLevel.EndToEndEncryptedAndVerified else SecurityLevel.EndToEndEncrypted
         val avatarModel = contact.value
         if (avatarModel != null && currentCall.conference == null) { // Don't do it for conferences
             avatarModel.trust.postValue(securityLevel)
@@ -1401,7 +1394,9 @@ class CurrentCallViewModel
         val localAddress = call.callLog.localAddress
         val remoteAddress = call.remoteAddress
         val core = call.core
-        val account = LinphoneUtils.getAccountForAddress(localAddress) ?: LinphoneUtils.getDefaultAccount() ?: return null
+        val account =
+            LinphoneUtils.getAccountForAddress(localAddress) ?: LinphoneUtils.getDefaultAccount()
+            ?: return null
 
         val params = coreContext.core.createConferenceParams(call.conference)
         params.isChatEnabled = true
@@ -1410,7 +1405,8 @@ class CurrentCallViewModel
         val chatParams = params.chatParams ?: return null
         chatParams.ephemeralLifetime = 0 // Make sure ephemeral is disabled by default
 
-        val sameDomain = remoteAddress.domain == corePreferences.defaultDomain && remoteAddress.domain == account.params.domain
+        val sameDomain =
+            remoteAddress.domain == corePreferences.defaultDomain && remoteAddress.domain == account.params.domain
         if (account.params.instantMessagingEncryptionMandatory && sameDomain) {
             Log.i(
                 "$TAG Account is in secure mode & domain matches, requesting E2E encryption"
@@ -1451,6 +1447,7 @@ class CurrentCallViewModel
                 Log.i("$TAG Call was accepted/declined on another device, do not show ended call fragment")
                 finishActivityEvent.postValue(Event(true))
             }
+
             else -> {
                 if (pipMode.value == true) {
                     Log.i("$TAG Activity currently displayed in PiP, do not go to ended call fragment")

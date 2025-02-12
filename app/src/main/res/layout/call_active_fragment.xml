@@ -29,9 +29,7 @@
         <variable
             name="callsViewModel"
             type="org.linphone.ui.call.viewmodel.CallsViewModel" />
-        <variable
-            name="numpadModel"
-            type="org.linphone.ui.main.history.model.NumpadModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -285,10 +283,6 @@
             bind:newCallClickListener="@{newCallClickListener}"
             bind:callsListClickListener="@{callsListClickListener}"/>
 
-        <include
-            android:id="@+id/call_numpad"
-            layout="@layout/call_numpad_bottom_sheet"
-            bind:model="@{numpadModel}"/>
 
         <include
             android:id="@+id/call_media_encryption_stats"

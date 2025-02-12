@@ -48,8 +48,6 @@ import org.linphone.ui.call.viewmodel.CallsViewModel
 import org.linphone.ui.call.viewmodel.CurrentCallViewModel
 import org.linphone.utils.DialogUtils
 import org.linphone.utils.Event
-import org.linphone.utils.addCharacterAtPosition
-import org.linphone.utils.removeCharacterAtPosition
 import org.linphone.utils.startAnimatedDrawable
 
 @UiThread
@@ -94,11 +92,11 @@ class ActiveCallFragment : GenericCallFragment() {
                 return
             }
 
-            val numpadBottomSheetBehavior = BottomSheetBehavior.from(binding.callNumpad.root)
-            if (numpadBottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
-                numpadBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                return
-            }
+//            val numpadBottomSheetBehavior = BottomSheetBehavior.from(binding.callNumpad.root)
+//            if (numpadBottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
+//                numpadBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+//                return
+//            }
 
             val callStatsBottomSheetBehavior = BottomSheetBehavior.from(binding.callStats.root)
             if (callStatsBottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
@@ -129,7 +127,7 @@ class ActiveCallFragment : GenericCallFragment() {
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
         return when (findNavController().currentDestination?.id) {
-            R.id.newCallFragment, R.id.callsListFragment, R.id.transferCallFragment -> {
+            R.id.callsListFragment, R.id.transferCallFragment -> {
                 // Holds fragment in place while new fragment slides over it
                 AnimationUtils.loadAnimation(activity, R.anim.hold)
             }
@@ -163,15 +161,15 @@ class ActiveCallFragment : GenericCallFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = callViewModel
         binding.callsViewModel = callsViewModel
-        binding.numpadModel = callViewModel.numpadModel
+//        binding.numpadModel = callViewModel.numpadModel
 
         val actionsBottomSheetBehavior = BottomSheetBehavior.from(binding.bottomBar.root)
         actionsBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         actionsBottomSheetBehavior.addBottomSheetCallback(actionsBottomSheetCallback)
 
-        val numpadBottomSheetBehavior = BottomSheetBehavior.from(binding.callNumpad.root)
-        numpadBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        numpadBottomSheetBehavior.skipCollapsed = true
+//        val numpadBottomSheetBehavior = BottomSheetBehavior.from(binding.callNumpad.root)
+//        numpadBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+//        numpadBottomSheetBehavior.skipCollapsed = true
 
         val callStatsBottomSheetBehavior = BottomSheetBehavior.from(binding.callStats.root)
         callStatsBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -197,9 +195,9 @@ class ActiveCallFragment : GenericCallFragment() {
 
         binding.setNewCallClickListener {
             if (findNavController().currentDestination?.id == R.id.activeCallFragment) {
-                val action =
-                    ActiveCallFragmentDirections.actionActiveCallFragmentToNewCallFragment()
-                findNavController().navigate(action)
+//                val action =
+//                    ActiveCallFragmentDirections.actionActiveCallFragmentToNewCallFragment()
+//                findNavController().navigate(action)
             }
         }
 
@@ -228,7 +226,7 @@ class ActiveCallFragment : GenericCallFragment() {
         callViewModel.fullScreenMode.observe(viewLifecycleOwner) { hide ->
             Log.i("$TAG Switching full screen mode to [${if (hide) "ON" else "OFF"}]")
             sharedViewModel.toggleFullScreenEvent.value = Event(hide)
-            numpadBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+//            numpadBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             callStatsBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             callMediaEncryptionStatsBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
@@ -293,21 +291,21 @@ class ActiveCallFragment : GenericCallFragment() {
         callViewModel.showNumpadBottomSheetEvent.observe(viewLifecycleOwner) {
             it.consume {
                 actionsBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                numpadBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+//                numpadBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
 
-        callViewModel.removedCharacterAtCurrentPositionEvent.observe(viewLifecycleOwner) {
-            it.consume {
-                binding.callNumpad.digitsHistory.removeCharacterAtPosition()
-            }
-        }
-
-        callViewModel.appendDigitToSearchBarEvent.observe(viewLifecycleOwner) {
-            it.consume { digit ->
-                binding.callNumpad.digitsHistory.addCharacterAtPosition(digit)
-            }
-        }
+//        callViewModel.removedCharacterAtCurrentPositionEvent.observe(viewLifecycleOwner) {
+//            it.consume {
+//                binding.callNumpad.digitsHistory.removeCharacterAtPosition()
+//            }
+//        }
+//
+//        callViewModel.appendDigitToSearchBarEvent.observe(viewLifecycleOwner) {
+//            it.consume { digit ->
+//                binding.callNumpad.digitsHistory.addCharacterAtPosition(digit)
+//            }
+//        }
 
         callViewModel.isRemoteRecordingEvent.observe(viewLifecycleOwner) {
             it.consume { pair ->
