@@ -24,7 +24,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.linphone.core.ConferenceInfo
 import org.linphone.core.Friend
-import org.linphone.ui.main.recordings.model.RecordingModel
 import org.linphone.utils.Event
 
 class SharedMainViewModel
@@ -130,8 +129,6 @@ class SharedMainViewModel
     }
 
     // Recordings related
-
-    var playingRecording: RecordingModel? = null
 
     // Other
 
