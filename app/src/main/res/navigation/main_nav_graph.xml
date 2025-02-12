@@ -3,54 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/meetingsListFragment">
-
-
-    <fragment
-        android:id="@+id/meetingsListFragment"
-        android:name="org.linphone.ui.main.meetings.fragment.MeetingsListFragment"
-        android:label="MeetingsListFragment"
-        tools:layout="@layout/meetings_list_fragment">
-        <action
-            android:id="@+id/action_meetingsListFragment_to_scheduleMeetingFragment"
-            app:destination="@id/scheduleMeetingFragment"
-            app:enterAnim="@anim/slide_in"
-            app:launchSingleTop="true"
-            app:popExitAnim="@anim/slide_out" />
-        <action
-            android:id="@+id/action_meetingsListFragment_to_meetingWaitingRoomFragment"
-            app:destination="@id/meetingWaitingRoomFragment"
-            app:enterAnim="@anim/slide_in"
-            app:launchSingleTop="true"
-            app:popExitAnim="@anim/slide_out" />
-    </fragment>
+    app:startDestination="@id/emptyFragment_amin">
 
     <fragment
-        android:id="@+id/scheduleMeetingFragment"
-        android:name="org.linphone.ui.main.meetings.fragment.ScheduleMeetingFragment"
-        android:label="ScheduleMeetingFragment"
-        tools:layout="@layout/meeting_schedule_fragment">
-        <argument
-            android:name="subject"
-            android:defaultValue=""
-            app:argType="string"
-            app:nullable="false" />
-        <argument
-            android:name="participants"
-            android:defaultValue="@null"
-            app:argType="string[]"
-            app:nullable="true" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/meetingWaitingRoomFragment"
-        android:name="org.linphone.ui.main.meetings.fragment.MeetingWaitingRoomFragment"
-        android:label="MeetingWaitingRoomFragment"
-        tools:layout="@layout/meeting_waiting_room_fragment">
-        <argument
-            android:name="conferenceUri"
-            app:argType="string" />
-    </fragment>
-
+        android:id="@+id/emptyFragment_amin"
+        android:name="org.linphone.ui.main.fragment.EmptyFragment"
+        android:label="EmptyFragment"
+        tools:layout="@layout/empty_fragment" />
 
 </navigation>

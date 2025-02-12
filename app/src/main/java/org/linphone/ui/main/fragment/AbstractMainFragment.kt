@@ -129,11 +129,6 @@ abstract class AbstractMainFragment : GenericMainFragment() {
             }
         }
 
-        sharedViewModel.currentlyDisplayedFragment.observe(viewLifecycleOwner) {
-//            viewModel.callsSelected.value = it == R.id.historyListFragment
-            viewModel.meetingsSelected.value = it == R.id.meetingsListFragment
-        }
-
         sharedViewModel.resetMissedCallsCountEvent.observe(viewLifecycleOwner) {
             it.consume {
                 viewModel.resetMissedCallsCount()

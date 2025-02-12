@@ -340,10 +340,6 @@ class MainActivity : GenericActivity() {
 
         val defaultFragmentId = when (sharedViewModel.currentlyDisplayedFragment.value) {
 
-            R.id.meetingsListFragment -> {
-                MEETINGS_FRAGMENT_ID
-            }
-
             else -> { // Default
                 HISTORY_FRAGMENT_ID
             }
@@ -412,15 +408,6 @@ class MainActivity : GenericActivity() {
                     CONTACTS_FRAGMENT_ID -> {
                         findNavController().addOnDestinationChangedListener(destinationListener)
 
-                    }
-
-                    MEETINGS_FRAGMENT_ID -> {
-                        findNavController().addOnDestinationChangedListener(destinationListener)
-                        findNavController().navigate(
-                            R.id.meetingsListFragment,
-                            args,
-                            navOptions
-                        )
                     }
 
                     else -> {
