@@ -39,8 +39,6 @@ import org.linphone.R
 import org.linphone.core.tools.Log
 import org.linphone.databinding.BottomNavBarBinding
 import org.linphone.databinding.MainActivityTopBarBinding
-import org.linphone.ui.main.MainActivity
-import org.linphone.ui.main.meetings.fragment.MeetingsListFragmentDirections
 import org.linphone.ui.main.viewmodel.AbstractMainViewModel
 import org.linphone.utils.Event
 import org.linphone.utils.SlidingPaneBackPressedCallback
@@ -105,7 +103,7 @@ abstract class AbstractMainFragment : GenericMainFragment() {
 
         viewModel.openDrawerMenuEvent.observe(viewLifecycleOwner) {
             it.consume {
-                (requireActivity() as MainActivity).toggleDrawerMenu()
+//                (requireActivity() as MainActivity).toggleDrawerMenu()
             }
         }
 
@@ -117,13 +115,13 @@ abstract class AbstractMainFragment : GenericMainFragment() {
             sharedViewModel.refreshDrawerMenuAccountsListEvent.value = Event(false)
         }
 
-        viewModel.navigateToHistoryEvent.observe(viewLifecycleOwner) {
-            it.consume {
-                if (currentFragmentId != R.id.historyListFragment) {
-                    goToHistoryList()
-                }
-            }
-        }
+//        viewModel.navigateToHistoryEvent.observe(viewLifecycleOwner) {
+//            it.consume {
+//                if (currentFragmentId != R.id.historyListFragment) {
+//                    goToHistoryList()
+//                }
+//            }
+//        }
 
         viewModel.defaultAccountChangedEvent.observe(viewLifecycleOwner) {
             it.consume {
@@ -132,7 +130,7 @@ abstract class AbstractMainFragment : GenericMainFragment() {
         }
 
         sharedViewModel.currentlyDisplayedFragment.observe(viewLifecycleOwner) {
-            viewModel.callsSelected.value = it == R.id.historyListFragment
+//            viewModel.callsSelected.value = it == R.id.historyListFragment
             viewModel.meetingsSelected.value = it == R.id.meetingsListFragment
         }
 
@@ -287,11 +285,11 @@ abstract class AbstractMainFragment : GenericMainFragment() {
         Log.i("$TAG Navigating to history list")
         when (currentFragmentId) {
 
-            R.id.meetingsListFragment -> {
-                Log.i("$TAG Leaving meetings list")
-                val action = MeetingsListFragmentDirections.actionMeetingsListFragmentToHistoryListFragment()
-                navigateTo(action)
-            }
+//            R.id.meetingsListFragment -> {
+//                Log.i("$TAG Leaving meetings list")
+//                val action = MeetingsListFragmentDirections.actionMeetingsListFragmentToHistoryListFragment()
+//                navigateTo(action)
+//            }
         }
     }
 

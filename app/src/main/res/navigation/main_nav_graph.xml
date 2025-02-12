@@ -3,32 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/historyListFragment">
-
-    <fragment
-        android:id="@+id/historyListFragment"
-        android:name="org.linphone.ui.main.history.fragment.HistoryListFragment"
-        android:label="HistoryListFragment"
-        tools:layout="@layout/history_list_fragment">
-        <action
-            android:id="@+id/action_historyListFragment_to_meetingsListFragment"
-            app:destination="@id/meetingsListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/historyListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_historyListFragment_to_startCallFragment"
-            app:destination="@id/startCallFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
-        <action
-            android:id="@+id/action_historyListFragment_to_meetingWaitingRoomFragment"
-            app:destination="@id/meetingWaitingRoomFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
-    </fragment>
+    app:startDestination="@id/settingsFragment">
 
     <fragment
         android:id="@+id/accountProfileFragment"
@@ -43,17 +18,17 @@
             app:destination="@id/accountProfileModeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_accountProfileFragment_to_accountSettingsFragment"
             app:destination="@id/accountSettingsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true" />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <action
@@ -61,37 +36,37 @@
         app:destination="@id/accountProfileFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
+        app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:launchSingleTop="true" />
+        app:popExitAnim="@anim/slide_out_right" />
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="org.linphone.ui.main.settings.fragment.SettingsFragment"
         android:label="SettingsFragment"
-        tools:layout="@layout/settings_fragment" >
+        tools:layout="@layout/settings_fragment">
         <action
             android:id="@+id/action_settingsFragment_to_ldapServerConfigurationFragment"
             app:destination="@id/ldapServerConfigurationFragment"
-            app:launchSingleTop="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_settingsFragment_to_cardDavAddressBookConfigurationFragment"
             app:destination="@id/cardDavAddressBookConfigurationFragment"
-            app:launchSingleTop="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_settingsFragment_to_settingsAdvancedFragment"
             app:destination="@id/settingsAdvancedFragment"
-            app:launchSingleTop="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
@@ -101,9 +76,9 @@
         app:destination="@id/settingsFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
+        app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:launchSingleTop="true"/>
+        app:popExitAnim="@anim/slide_out_right" />
 
     <fragment
         android:id="@+id/recordingsListFragment"
@@ -116,9 +91,9 @@
             app:destination="@id/recordingMediaPlayerFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true" />
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
@@ -127,27 +102,16 @@
         app:destination="@id/recordingsListFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
+        app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:launchSingleTop="true"/>
+        app:popExitAnim="@anim/slide_out_right" />
 
-    <fragment
-        android:id="@+id/startCallFragment"
-        android:name="org.linphone.ui.main.history.fragment.StartCallFragment"
-        android:label="StartCallFragment"
-        tools:layout="@layout/start_call_fragment" />
-
-    <fragment
-        android:id="@+id/newContactFragment"
-        android:name="org.linphone.ui.main.contacts.fragment.NewContactFragment"
-        android:label="NewContactFragment"
-        tools:layout="@layout/contact_new_or_edit_fragment"/>
 
     <fragment
         android:id="@+id/accountProfileModeFragment"
         android:name="org.linphone.ui.main.settings.fragment.AccountProfileModeFragment"
         android:label="AccountProfileModeFragment"
-        tools:layout="@layout/account_profile_secure_mode_fragment"/>
+        tools:layout="@layout/account_profile_secure_mode_fragment" />
 
     <fragment
         android:id="@+id/accountSettingsFragment"
@@ -165,23 +129,17 @@
         android:label="MeetingsListFragment"
         tools:layout="@layout/meetings_list_fragment">
         <action
-            android:id="@+id/action_meetingsListFragment_to_historyListFragment"
-            app:destination="@id/historyListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/meetingsListFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_meetingsListFragment_to_scheduleMeetingFragment"
             app:destination="@id/scheduleMeetingFragment"
             app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
+            app:launchSingleTop="true"
+            app:popExitAnim="@anim/slide_out" />
         <action
             android:id="@+id/action_meetingsListFragment_to_meetingWaitingRoomFragment"
             app:destination="@id/meetingWaitingRoomFragment"
             app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
+            app:launchSingleTop="true"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
 
     <fragment
@@ -191,14 +149,14 @@
         tools:layout="@layout/meeting_schedule_fragment">
         <argument
             android:name="subject"
+            android:defaultValue=""
             app:argType="string"
-            app:nullable="false"
-            android:defaultValue="" />
+            app:nullable="false" />
         <argument
             android:name="participants"
+            android:defaultValue="@null"
             app:argType="string[]"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -215,7 +173,7 @@
         android:id="@+id/ldapServerConfigurationFragment"
         android:name="org.linphone.ui.main.settings.fragment.LdapServerConfigurationFragment"
         android:label="LdapServerConfigurationFragment"
-        tools:layout="@layout/settings_contacts_ldap" >
+        tools:layout="@layout/settings_contacts_ldap">
         <argument
             android:name="serverUrl"
             app:argType="string"
@@ -226,7 +184,7 @@
         android:id="@+id/cardDavAddressBookConfigurationFragment"
         android:name="org.linphone.ui.main.settings.fragment.CardDavAddressBookConfigurationFragment"
         android:label="CardDavAddressBookConfigurationFragment"
-        tools:layout="@layout/settings_contacts_carddav" >
+        tools:layout="@layout/settings_contacts_carddav">
         <argument
             android:name="displayName"
             app:argType="string"
@@ -237,33 +195,13 @@
         android:id="@+id/settingsAdvancedFragment"
         android:name="org.linphone.ui.main.settings.fragment.SettingsAdvancedFragment"
         android:label="SettingsAdvancedFragment"
-        tools:layout="@layout/settings_advanced_fragment"/>
+        tools:layout="@layout/settings_advanced_fragment" />
 
-    <fragment
-        android:id="@+id/singleSignOnFragment"
-        android:name="org.linphone.ui.main.sso.fragment.SingleSignOnFragment"
-        android:label="SingleSignOnFragment"
-        tools:layout="@layout/single_sign_on_fragment">
-        <argument
-            android:name="serverUrl"
-            app:argType="string" />
-        <argument
-            android:name="username"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
-
-    <action android:id="@+id/action_global_singleSignOnFragment"
-        app:destination="@id/singleSignOnFragment"
-        app:launchSingleTop="true"
-        app:enterAnim="@anim/slide_in"
-        app:popExitAnim="@anim/slide_out" />
 
     <fragment
         android:id="@+id/recordingMediaPlayerFragment"
         android:name="org.linphone.ui.main.recordings.fragment.RecordingMediaPlayerFragment"
         android:label="RecordingMediaPlayerFragment"
-        tools:layout="@layout/recording_player_fragment"/>
+        tools:layout="@layout/recording_player_fragment" />
 
 </navigation>

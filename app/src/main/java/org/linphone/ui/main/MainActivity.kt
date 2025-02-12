@@ -28,8 +28,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.Gravity
-import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.WindowManager
 import androidx.activity.SystemBarStyle
@@ -67,7 +65,6 @@ import org.linphone.ui.main.viewmodel.MainViewModel
 import org.linphone.ui.main.viewmodel.SharedMainViewModel
 import org.linphone.utils.AppUtils
 import org.linphone.utils.DialogUtils
-import org.linphone.utils.Event
 import org.linphone.utils.FileUtils
 import org.linphone.utils.LinphoneUtils
 
@@ -146,16 +143,16 @@ class MainActivity : GenericActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.drawerMenuContent) { v, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val mlp = v.layoutParams as ViewGroup.MarginLayoutParams
-            mlp.leftMargin = insets.left
-            mlp.topMargin = insets.top
-            mlp.rightMargin = insets.right
-            mlp.bottomMargin = insets.bottom
-            v.layoutParams = mlp
-            WindowInsetsCompat.CONSUMED
-        }
+//        ViewCompat.setOnApplyWindowInsetsListener(binding.drawerMenuContent) { v, windowInsets ->
+//            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            val mlp = v.layoutParams as ViewGroup.MarginLayoutParams
+//            mlp.leftMargin = insets.left
+//            mlp.topMargin = insets.top
+//            mlp.rightMargin = insets.right
+//            mlp.bottomMargin = insets.bottom
+//            v.layoutParams = mlp
+//            WindowInsetsCompat.CONSUMED
+//        }
 
         while (!coreContext.isReady()) {
             Thread.sleep(50)
@@ -176,11 +173,11 @@ class MainActivity : GenericActivity() {
 //            }
 //        }
 
-        viewModel.openDrawerEvent.observe(this) {
-            it.consume {
-                openDrawerMenu()
-            }
-        }
+//        viewModel.openDrawerEvent.observe(this) {
+//            it.consume {
+//                openDrawerMenu()
+//            }
+//        }
 
         viewModel.askPostNotificationsPermissionEvent.observe(this) {
             it.consume {
@@ -343,10 +340,6 @@ class MainActivity : GenericActivity() {
 
         val defaultFragmentId = when (sharedViewModel.currentlyDisplayedFragment.value) {
 
-            R.id.historyListFragment -> {
-                HISTORY_FRAGMENT_ID
-            }
-
             R.id.meetingsListFragment -> {
                 MEETINGS_FRAGMENT_ID
             }
@@ -377,23 +370,6 @@ class MainActivity : GenericActivity() {
         super.onNewIntent(intent)
         Log.d("$TAG Handling new intent")
         handleIntent(intent)
-    }
-
-    @SuppressLint("RtlHardcoded")
-    fun toggleDrawerMenu() {
-        if (binding.drawerMenu.isDrawerOpen(Gravity.LEFT)) {
-            closeDrawerMenu()
-        } else {
-            openDrawerMenu()
-        }
-    }
-
-    fun closeDrawerMenu() {
-        binding.drawerMenu.closeDrawer(binding.drawerMenuContent, true)
-    }
-
-    private fun openDrawerMenu() {
-        binding.drawerMenu.openDrawer(binding.drawerMenuContent, true)
     }
 
     fun findNavController(): NavController {
@@ -428,7 +404,7 @@ class MainActivity : GenericActivity() {
             )
             try {
                 val navOptionsBuilder = NavOptions.Builder()
-                navOptionsBuilder.setPopUpTo(R.id.historyListFragment, true)
+//                navOptionsBuilder.setPopUpTo(R.id.historyListFragment, true)
                 navOptionsBuilder.setLaunchSingleTop(true)
                 val navOptions = navOptionsBuilder.build()
                 val args = bundleOf()
@@ -513,7 +489,6 @@ class MainActivity : GenericActivity() {
             Log.i(
                 "$TAG Navigating to conversation with local [$localSipUri] and peer [$remoteSipUri] addresses, computed from shortcut ID"
             )
-            sharedViewModel.showConversationEvent.value = Event(pair)
         }
     }
 
@@ -627,7 +602,7 @@ class MainActivity : GenericActivity() {
 
             if (binding.drawerMenu.isOpen) {
                 Log.i("$TAG Drawer menu is opened, closing it")
-                closeDrawerMenu()
+//                closeDrawerMenu()
             }
 
             val paths = deferred.awaitAll()
@@ -668,7 +643,6 @@ class MainActivity : GenericActivity() {
                 Log.i(
                     "$TAG Navigating to conversation with local [$localSipUri] and peer [$remoteSipUri] addresses, computed from shortcut ID"
                 )
-                sharedViewModel.showConversationEvent.value = Event(pair)
             }
         }
     }

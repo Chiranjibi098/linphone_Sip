@@ -629,7 +629,7 @@ class NotificationsManager
         val pendingIntent = NavDeepLinkBuilder(context)
             .setComponentName(MainActivity::class.java)
             .setGraph(R.navigation.main_nav_graph)
-            .setDestination(R.id.historyListFragment)
+//            .setDestination(R.id.historyListFragment)
             .createPendingIntent()
 
         val builder = NotificationCompat.Builder(
