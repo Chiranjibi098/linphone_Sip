@@ -143,17 +143,6 @@ class MainActivity : GenericActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
-//        ViewCompat.setOnApplyWindowInsetsListener(binding.drawerMenuContent) { v, windowInsets ->
-//            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            val mlp = v.layoutParams as ViewGroup.MarginLayoutParams
-//            mlp.leftMargin = insets.left
-//            mlp.topMargin = insets.top
-//            mlp.rightMargin = insets.right
-//            mlp.bottomMargin = insets.bottom
-//            v.layoutParams = mlp
-//            WindowInsetsCompat.CONSUMED
-//        }
-
         while (!coreContext.isReady()) {
             Thread.sleep(50)
         }
@@ -166,18 +155,6 @@ class MainActivity : GenericActivity() {
         sharedViewModel = run {
             ViewModelProvider(this)[SharedMainViewModel::class.java]
         }
-
-//        viewModel.goBackToCallEvent.observe(this) {
-//            it.consume {
-//                coreContext.showCallActivity()
-//            }
-//        }
-
-//        viewModel.openDrawerEvent.observe(this) {
-//            it.consume {
-//                openDrawerMenu()
-//            }
-//        }
 
         viewModel.askPostNotificationsPermissionEvent.observe(this) {
             it.consume {
@@ -199,7 +176,6 @@ class MainActivity : GenericActivity() {
             it.consume { error ->
                 val tag = "DEFAULT_ACCOUNT_REGISTRATION_ERROR"
                 if (error) {
-                    // First remove any already existing connection error toast
                     removePersistentRedToast(tag)
 
                     val message = getString(R.string.default_account_connection_state_error_toast)
@@ -249,22 +225,6 @@ class MainActivity : GenericActivity() {
                 }
             }
         })
-
-//        coreContext.bearerAuthenticationRequestedEvent.observe(this) {
-//            it.consume { pair ->
-//                val serverUrl = pair.first
-//                val username = pair.second
-//
-//                Log.i(
-//                    "$TAG Navigating to Single Sign On Fragment with server URL [$serverUrl] and username [$username]"
-//                )
-//                val action = SingleSignOnFragmentDirections.actionGlobalSingleSignOnFragment(
-//                    serverUrl,
-//                    username
-//                )
-//                findNavController().navigate(action)
-//            }
-//        }
 
         coreContext.digestAuthenticationRequestedEvent.observe(this) {
             it.consume { identity ->
@@ -479,73 +439,6 @@ class MainActivity : GenericActivity() {
         }
     }
 
-    //    private fun handleMainIntent(intent: Intent) {
-//        coreContext.postOnCoreThread { core ->
-//            if (corePreferences.firstLaunch) {
-//                Log.i("$TAG First time Linphone 6.0 has been started, showing Welcome activity")
-//                corePreferences.firstLaunch = false
-//                coreContext.postOnMainThread {
-//                    try {
-//                    } catch (ise: IllegalStateException) {
-//                        Log.e("$TAG Can't start activity: $ise")
-//                    }
-//                }
-//            } else if (core.accountList.isEmpty()) {
-//                Log.w("$TAG No account found, showing Assistant activity")
-//                coreContext.postOnMainThread {
-//                    try {
-//                        startActivity(Intent(this, AssistantActivity::class.java))
-//                    } catch (ise: IllegalStateException) {
-//                        Log.e("$TAG Can't start activity: $ise")
-//                    }
-//                }
-//            }
-// //            else {
-// //                if (intent.hasExtra("Chat")) {
-// //                    Log.i("$TAG Intent has [Chat] extra")
-// //                    coreContext.postOnMainThread {
-// //                        try {
-// //                            Log.i("$TAG Trying to go to Conversations fragment")
-// //                            val args = intent.extras
-// //                            val localSipUri = args?.getString("LocalSipUri", "")
-// //                            val remoteSipUri = args?.getString("RemoteSipUri", "")
-// //                            if (remoteSipUri.isNullOrEmpty() || localSipUri.isNullOrEmpty()) {
-// //                                Log.w("$TAG Found [Chat] extra but no local and/or remote SIP URI!")
-// //                            } else {
-// //                                Log.i(
-// //                                    "$TAG Found [Chat] extra with local [$localSipUri] and peer [$remoteSipUri] addresses"
-// //                                )
-// //                                val pair = Pair(localSipUri, remoteSipUri)
-// //                                sharedViewModel.showConversationEvent.value = Event(pair)
-// //                            }
-// //                            args?.clear()
-// //
-// //                            if (findNavController().currentDestination?.id == R.id.conversationsListFragment) {
-// //                                Log.w(
-// //                                    "$TAG Current destination is already conversations list, skipping navigation"
-// //                                )
-// //                            } else {
-// //                                val navOptionsBuilder = NavOptions.Builder()
-// //                                navOptionsBuilder.setPopUpTo(
-// //                                    findNavController().currentDestination?.id ?: R.id.historyListFragment,
-// //                                    true
-// //                                )
-// //                                navOptionsBuilder.setLaunchSingleTop(true)
-// //                                val navOptions = navOptionsBuilder.build()
-// //                                findNavController().navigate(
-// //                                    R.id.conversationsListFragment,
-// //                                    args,
-// //                                    navOptions
-// //                                )
-// //                            }
-// //                        } catch (ise: IllegalStateException) {
-// //                            Log.e("$TAG Can't navigate to Conversations fragment: $ise")
-// //                        }
-// //                    }
-// //                }
-// //            }
-//        }
-//    }
     private fun handleMainIntent(intent: Intent) {
         startActivity(Intent(this, AssistantActivity::class.java))
     }

@@ -44,7 +44,6 @@ import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlin.math.max
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.linphone.LinphoneApplication.Companion.coreContext
@@ -55,11 +54,8 @@ import org.linphone.compatibility.Compatibility
 import org.linphone.core.tools.Log
 import org.linphone.databinding.CallActivityBinding
 import org.linphone.ui.GenericActivity
-import org.linphone.ui.call.conference.fragment.ActiveConferenceCallFragmentDirections
-import org.linphone.ui.call.conference.fragment.ConferenceLayoutMenuDialogFragment
 import org.linphone.ui.call.fragment.ActiveCallFragmentDirections
 import org.linphone.ui.call.fragment.AudioDevicesMenuDialogFragment
-import org.linphone.ui.call.fragment.CallsListFragmentDirections
 import org.linphone.ui.call.fragment.IncomingCallFragmentDirections
 import org.linphone.ui.call.fragment.OutgoingCallFragmentDirections
 import org.linphone.ui.call.model.AudioDeviceModel
@@ -67,6 +63,7 @@ import org.linphone.ui.call.viewmodel.CallsViewModel
 import org.linphone.ui.call.viewmodel.CurrentCallViewModel
 import org.linphone.ui.call.viewmodel.SharedCallViewModel
 import org.linphone.ui.main.MainActivity
+import kotlin.math.max
 
 @UiThread
 class CallActivity : GenericActivity() {
@@ -195,11 +192,11 @@ class CallActivity : GenericActivity() {
             }
         }
 
-        callViewModel.conferenceModel.showLayoutMenuEvent.observe(this) {
-            it.consume {
-                showConferenceLayoutMenu()
-            }
-        }
+//        callViewModel.conferenceModel.showLayoutMenuEvent.observe(this) {
+//            it.consume {
+//                showConferenceLayoutMenu()
+//            }
+//        }
 
         callViewModel.isVideoEnabled.observe(this) { enabled ->
             if (isPipSupported) {
@@ -297,7 +294,7 @@ class CallActivity : GenericActivity() {
 
         callsViewModel.goToActiveCallEvent.observe(this) {
             it.consume { singleCall ->
-                navigateToActiveCall(singleCall)
+                navigateToActiveCall()
             }
         }
 
@@ -313,10 +310,6 @@ class CallActivity : GenericActivity() {
                 if (navController.currentDestination?.id == R.id.activeCallFragment) {
                     val action =
                         ActiveCallFragmentDirections.actionActiveCallFragmentToCallsListFragment()
-                    navController.navigate(action)
-                } else if (navController.currentDestination?.id == R.id.activeConferenceCallFragment) {
-                    val action =
-                        ActiveConferenceCallFragmentDirections.actionActiveConferenceCallFragmentToCallsListFragment()
                     navController.navigate(action)
                 }
             }
@@ -403,9 +396,9 @@ class CallActivity : GenericActivity() {
         super.onNewIntent(intent)
 
         if (intent.extras?.getBoolean("ActiveCall", false) == true) {
-            navigateToActiveCall(
-                callViewModel.conferenceModel.isCurrentCallInConference.value == false
-            )
+//            navigateToActiveCall(
+//                callViewModel.conferenceModel.isCurrentCallInConference.value == false
+//            )
         } else if (intent.extras?.getBoolean("IncomingCall", false) == true) {
             val action = IncomingCallFragmentDirections.actionGlobalIncomingCallFragment()
             findNavController(R.id.call_nav_container).navigate(action)
@@ -463,73 +456,20 @@ class CallActivity : GenericActivity() {
         }
     }
 
-    private fun navigateToActiveCall(notInConference: Boolean) {
+    private fun navigateToActiveCall() {
         val navController = findNavController(R.id.call_nav_container)
         val action = when (navController.currentDestination?.id) {
             R.id.outgoingCallFragment -> {
-                if (notInConference) {
-                    Log.i("$TAG Going from outgoing call fragment to call fragment")
-                    OutgoingCallFragmentDirections.actionOutgoingCallFragmentToActiveCallFragment()
-                } else {
-                    Log.i(
-                        "$TAG Going from outgoing call fragment to conference call fragment"
-                    )
-                    OutgoingCallFragmentDirections.actionOutgoingCallFragmentToActiveConferenceCallFragment()
-                }
+                OutgoingCallFragmentDirections.actionOutgoingCallFragmentToActiveCallFragment()
             }
-
             R.id.incomingCallFragment -> {
-                if (notInConference) {
-                    Log.i("$TAG Going from incoming call fragment to call fragment")
-                    IncomingCallFragmentDirections.actionIncomingCallFragmentToActiveCallFragment()
-                } else {
-                    Log.i(
-                        "$TAG Going from incoming call fragment to conference call fragment"
-                    )
-                    IncomingCallFragmentDirections.actionIncomingCallFragmentToActiveConferenceCallFragment()
-                }
+                IncomingCallFragmentDirections.actionIncomingCallFragmentToActiveCallFragment()
             }
-
             R.id.activeCallFragment -> {
-                if (notInConference) {
-                    Log.i("$TAG Going from call fragment to call fragment")
-                    ActiveCallFragmentDirections.actionGlobalActiveCallFragment()
-                } else {
-                    Log.i("$TAG Going from call fragment to conference call fragment")
-                    ActiveCallFragmentDirections.actionActiveCallFragmentToActiveConferenceCallFragment()
-                }
+                ActiveCallFragmentDirections.actionGlobalActiveCallFragment()
             }
-
-            R.id.activeConferenceCallFragment -> {
-                if (notInConference) {
-                    Log.i("$TAG Going from conference call fragment to call fragment")
-                    ActiveConferenceCallFragmentDirections.actionActiveConferenceCallFragmentToActiveCallFragment()
-                } else {
-                    Log.i(
-                        "$TAG Going from conference call fragment to conference call fragment"
-                    )
-                    ActiveConferenceCallFragmentDirections.actionGlobalActiveConferenceCallFragment()
-                }
-            }
-
-            R.id.callsListFragment -> {
-                if (notInConference) {
-                    Log.i("$TAG Going calls list fragment to active call fragment")
-                    CallsListFragmentDirections.actionCallsListFragmentToActiveCallFragment()
-                } else {
-                    Log.i("$TAG Going calls list fragment to conference fragment")
-                    CallsListFragmentDirections.actionCallsListFragmentToActiveConferenceCallFragment()
-                }
-            }
-
             else -> {
-                if (notInConference) {
-                    Log.i("$TAG Going from call fragment to call fragment")
-                    ActiveCallFragmentDirections.actionGlobalActiveCallFragment()
-                } else {
-                    Log.i("$TAG Going from call fragment to conference call fragment")
-                    ActiveConferenceCallFragmentDirections.actionGlobalActiveConferenceCallFragment()
-                }
+                ActiveCallFragmentDirections.actionGlobalActiveCallFragment()
             }
         }
         navController.navigate(action)
@@ -551,11 +491,11 @@ class CallActivity : GenericActivity() {
         bottomSheetDialog = modalBottomSheet
     }
 
-    private fun showConferenceLayoutMenu() {
-        val modalBottomSheet = ConferenceLayoutMenuDialogFragment(callViewModel.conferenceModel)
-        modalBottomSheet.show(supportFragmentManager, ConferenceLayoutMenuDialogFragment.TAG)
-        bottomSheetDialog = modalBottomSheet
-    }
+//    private fun showConferenceLayoutMenu() {
+//        val modalBottomSheet = ConferenceLayoutMenuDialogFragment(callViewModel.conferenceModel)
+//        modalBottomSheet.show(supportFragmentManager, ConferenceLayoutMenuDialogFragment.TAG)
+//        bottomSheetDialog = modalBottomSheet
+//    }
 
     private fun enableProximitySensor(enable: Boolean) {
         if (enable && !proximityWakeLock.isHeld) {

@@ -49,8 +49,8 @@ import org.linphone.utils.Event
 import org.linphone.utils.LinphoneUtils
 
 class CoreContext
-    @UiThread
-    constructor(val context: Context) : HandlerThread("Core Thread") {
+@UiThread
+constructor(val context: Context) : HandlerThread("Core Thread") {
     companion object {
         private const val TAG = "[Core Context]"
     }
@@ -221,11 +221,13 @@ class CoreContext
                         )
                     }
                 }
+
                 Call.State.Connected -> {
                     postOnMainThread {
                         showCallActivity()
                     }
                 }
+
                 Call.State.StreamsRunning -> {
                     if (previousCallState == Call.State.Connected) {
                         if (corePreferences.automaticallyStartCallRecording && !call.params.isRecording) {
@@ -236,6 +238,7 @@ class CoreContext
                         }
                     }
                 }
+
                 Call.State.Error -> {
                     val errorInfo = call.errorInfo
                     Log.w(
@@ -246,6 +249,7 @@ class CoreContext
                         Event(Pair(text, org.linphone.R.drawable.warning_circle))
                     )
                 }
+
                 else -> {
                 }
             }
@@ -313,6 +317,7 @@ class CoreContext
                         )
                     }
                 }
+
                 AuthMethod.HttpDigest -> {
                     if (authInfo.username == null || authInfo.domain == null || authInfo.realm == null) {
                         Log.e(
@@ -338,9 +343,11 @@ class CoreContext
                     digestAuthInfoPendingPasswordUpdate = authInfo
                     digestAuthenticationRequestedEvent.postValue(Event(identity))
                 }
+
                 AuthMethod.Tls -> {
                     Log.w("$TAG Authentication requested method is TLS, not doing anything...")
                 }
+
                 else -> {
                     Log.w("$TAG Unexpected authentication request method [$method]")
                 }
@@ -494,7 +501,10 @@ class CoreContext
 
         contactsManager.onCoreStarted(core)
         telecomManager.onCoreStarted(core)
-        notificationsManager.onCoreStarted(core, oldVersion < 600000) // Re-create channels when migrating from a non 6.0 version
+        notificationsManager.onCoreStarted(
+            core,
+            oldVersion < 600000
+        ) // Re-create channels when migrating from a non 6.0 version
         Log.i("$TAG Started contacts, telecom & notifications managers")
     }
 
@@ -747,7 +757,8 @@ class CoreContext
             // Prevent incoming group call to start in audio only layout
             // Do the same as the conference waiting room
             params.isVideoEnabled = true
-            params.videoDirection = if (core.videoActivationPolicy.automaticallyInitiate) MediaDirection.SendRecv else MediaDirection.RecvOnly
+            params.videoDirection =
+                if (core.videoActivationPolicy.automaticallyInitiate) MediaDirection.SendRecv else MediaDirection.RecvOnly
             Log.i(
                 "$TAG Enabling video on call params to prevent audio-only layout when answering"
             )
@@ -919,7 +930,8 @@ class CoreContext
             core.fileTransferServer = "https://files.linphone.org/http-file-transfer-server/hft.php"
         }
         if (core.logCollectionUploadServerUrl == "https://www.linphone.org:444/lft.php") {
-            core.logCollectionUploadServerUrl = "https://files.linphone.org/http-file-transfer-server/hft.php"
+            core.logCollectionUploadServerUrl =
+                "https://files.linphone.org/http-file-transfer-server/hft.php"
         }
 
         Log.i("$TAG IMDN threshold set to 1 (meaning only sender will receive delivery & read notifications)")

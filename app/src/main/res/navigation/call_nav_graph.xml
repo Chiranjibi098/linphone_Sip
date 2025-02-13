@@ -16,12 +16,7 @@
             app:popUpTo="@id/outgoingCallFragment"
             app:popUpToInclusive="true"
             app:launchSingleTop="true"/>
-        <action
-            android:id="@+id/action_outgoingCallFragment_to_activeConferenceCallFragment"
-            app:destination="@id/activeConferenceCallFragment"
-            app:popUpTo="@id/outgoingCallFragment"
-            app:popUpToInclusive="true"
-            app:launchSingleTop="true" />
+
     </fragment>
 
     <action android:id="@+id/action_global_outgoingCallFragment"
@@ -41,12 +36,7 @@
             app:popUpTo="@id/incomingCallFragment"
             app:popUpToInclusive="true"
             app:launchSingleTop="true" />
-        <action
-            android:id="@+id/action_incomingCallFragment_to_activeConferenceCallFragment"
-            app:destination="@id/activeConferenceCallFragment"
-            app:popUpTo="@id/outgoingCallFragment"
-            app:popUpToInclusive="true"
-            app:launchSingleTop="true" />
+
     </fragment>
 
     <action android:id="@+id/action_global_incomingCallFragment"
@@ -60,24 +50,14 @@
         android:name="org.linphone.ui.call.fragment.ActiveCallFragment"
         android:label="ActiveCallFragment"
         tools:layout="@layout/call_active_fragment">
-        <action
-            android:id="@+id/action_activeCallFragment_to_transferCallFragment"
-            app:destination="@id/transferCallFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
+
         <action
             android:id="@+id/action_activeCallFragment_to_callsListFragment"
             app:destination="@id/callsListFragment"
             app:enterAnim="@anim/slide_in"
             app:popExitAnim="@anim/slide_out"
             app:launchSingleTop="true" />
-        <action
-            android:id="@+id/action_activeCallFragment_to_activeConferenceCallFragment"
-            app:destination="@id/activeConferenceCallFragment"
-            app:popUpTo="@id/activeCallFragment"
-            app:popUpToInclusive="true"
-            app:launchSingleTop="true" />
+
     </fragment>
 
     <action android:id="@+id/action_global_activeCallFragment"
@@ -86,21 +66,13 @@
         app:popUpToInclusive="true"
         app:launchSingleTop="true"/>
 
-    <fragment
-        android:id="@+id/transferCallFragment"
-        android:name="org.linphone.ui.call.fragment.TransferCallFragment"
-        android:label="TransferCallFragment"
-        tools:layout="@layout/start_call_fragment" >
-    </fragment>
 
     <fragment
         android:id="@+id/callsListFragment"
         android:name="org.linphone.ui.call.fragment.CallsListFragment"
         android:label="CallsListFragment"
         tools:layout="@layout/calls_list_fragment" >
-        <action
-            android:id="@+id/action_callsListFragment_to_activeConferenceCallFragment"
-            app:destination="@id/activeConferenceCallFragment" />
+
         <action
             android:id="@+id/action_callsListFragment_to_activeCallFragment"
             app:destination="@id/activeCallFragment" />
@@ -116,54 +88,6 @@
         app:destination="@id/endedCallFragment"
         app:launchSingleTop="true"/>
 
-    <fragment
-        android:id="@+id/activeConferenceCallFragment"
-        android:name="org.linphone.ui.call.conference.fragment.ActiveConferenceCallFragment"
-        android:label="ActiveConferenceCallFragment"
-        tools:layout="@layout/call_active_conference_fragment">
-        <action
-            android:id="@+id/action_activeConferenceCallFragment_to_activeCallFragment"
-            app:destination="@id/activeCallFragment"
-            app:popUpTo="@id/activeConferenceCallFragment"
-            app:popUpToInclusive="true"
-            app:launchSingleTop="true" />
-        <action
-            android:id="@+id/action_activeConferenceCallFragment_to_conferenceParticipantsListFragment"
-            app:destination="@id/conferenceParticipantsListFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
-        <action
-            android:id="@+id/action_activeConferenceCallFragment_to_callsListFragment"
-            app:destination="@id/callsListFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
-    </fragment>
 
-    <action android:id="@+id/action_global_activeConferenceCallFragment"
-        app:destination="@id/activeConferenceCallFragment"
-        app:popUpTo="@id/activeConferenceCallFragment"
-        app:popUpToInclusive="true"
-        app:launchSingleTop="true"/>
-
-    <fragment
-        android:id="@+id/conferenceParticipantsListFragment"
-        android:name="org.linphone.ui.call.conference.fragment.ConferenceParticipantsListFragment"
-        android:label="ConferenceParticipantsListFragment"
-        tools:layout="@layout/call_conference_participants_list_fragment">
-        <action
-            android:id="@+id/action_conferenceParticipantsListFragment_to_conferenceAddParticipantsFragment"
-            app:destination="@id/conferenceAddParticipantsFragment"
-            app:enterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out"
-            app:launchSingleTop="true" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/conferenceAddParticipantsFragment"
-        android:name="org.linphone.ui.call.conference.fragment.ConferenceAddParticipantsFragment"
-        android:label="ConferenceAddParticipantsFragment"
-        tools:layout="@layout/generic_add_participants_fragment"/>
 
 </navigation>

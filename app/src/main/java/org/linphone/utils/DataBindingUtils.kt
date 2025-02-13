@@ -26,7 +26,6 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -68,7 +67,6 @@ import org.linphone.contacts.AvatarGenerator
 import org.linphone.core.ConsolidatedPresence
 import org.linphone.core.tools.Log
 import org.linphone.ui.NotoSansFont
-import org.linphone.ui.call.conference.model.ConferenceParticipantDeviceModel
 import org.linphone.ui.call.view.RoundCornersTextureView
 
 /**
@@ -498,14 +496,14 @@ private fun getErrorImageLoader(
     }
 }
 
-@UiThread
-@BindingAdapter("participantTextureView")
-fun setParticipantTextureView(
-    textureView: TextureView,
-    model: ConferenceParticipantDeviceModel
-) {
-    model.setTextureView(textureView)
-}
+// @UiThread
+// @BindingAdapter("participantTextureView")
+// fun setParticipantTextureView(
+//    textureView: TextureView,
+//    model: ConferenceParticipantDeviceModel
+// ) {
+//    model.setTextureView(textureView)
+// }
 
 @UiThread
 @BindingAdapter("onValueChanged")

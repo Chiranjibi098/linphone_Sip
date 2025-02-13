@@ -53,7 +53,6 @@ import org.linphone.core.MediaEncryption
 import org.linphone.core.SecurityLevel
 import org.linphone.core.tools.Log
 import org.linphone.ui.GenericViewModel
-import org.linphone.ui.call.conference.viewmodel.ConferenceViewModel
 import org.linphone.ui.call.model.AudioDeviceModel
 import org.linphone.ui.call.model.CallMediaEncryptionModel
 import org.linphone.ui.call.model.CallStatsModel
@@ -208,7 +207,7 @@ constructor() : GenericViewModel() {
 
     // Conference
 
-    val conferenceModel = ConferenceViewModel()
+//    val conferenceModel = ConferenceViewModel()
 
     val goToConferenceEvent: MutableLiveData<Event<Boolean>> by lazy {
         MutableLiveData<Event<Boolean>>()
@@ -346,10 +345,10 @@ constructor() : GenericViewModel() {
                         Log.i(
                             "$TAG Call is in Connected state and conference isn't null, going to conference fragment"
                         )
-                        conferenceModel.configureFromCall(call)
+//                        conferenceModel.configureFromCall(call)
                         goToConferenceEvent.postValue(Event(true))
                     } else {
-                        conferenceModel.destroy()
+//                        conferenceModel.destroy()
                     }
                 } else if (call.state == Call.State.StreamsRunning) {
                     videoUpdateInProgress.postValue(false)
@@ -560,7 +559,7 @@ constructor() : GenericViewModel() {
         coreContext.postOnCoreThread { core ->
             core.removeListener(coreListener)
             coreContext.contactsManager.removeListener(contactsListener)
-            conferenceModel.destroy()
+//            conferenceModel.destroy()
             contact.value?.destroy()
 
             if (::currentCall.isInitialized) {
@@ -790,7 +789,7 @@ constructor() : GenericViewModel() {
                         Log.i("$TAG Conference found and video disabled in params, enabling it")
                         params.isVideoEnabled = true
                         params.videoDirection = MediaDirection.SendRecv
-                        conferenceModel.setNewLayout(ConferenceViewModel.ACTIVE_SPEAKER_LAYOUT)
+//                        conferenceModel.setNewLayout(ConferenceViewModel.ACTIVE_SPEAKER_LAYOUT)
                     } else {
                         if (params?.videoDirection == MediaDirection.SendRecv || params?.videoDirection == MediaDirection.SendOnly) {
                             Log.i(
@@ -807,7 +806,7 @@ constructor() : GenericViewModel() {
 
                     val sendingVideo =
                         params?.videoDirection == MediaDirection.SendRecv || params?.videoDirection == MediaDirection.SendOnly
-                    conferenceModel.localVideoStreamToggled(sendingVideo)
+//                    conferenceModel.localVideoStreamToggled(sendingVideo)
                 } else if (params != null) {
                     params.isVideoEnabled = true
                     params.videoDirection = when (currentCall.currentParams.videoDirection) {
@@ -854,7 +853,7 @@ constructor() : GenericViewModel() {
         coreContext.postOnCoreThread {
             if (::currentCall.isInitialized) {
                 if (currentCall.conference != null) {
-                    conferenceModel.togglePause()
+//                    conferenceModel.togglePause()
                 } else {
                     when (isCallPaused()) {
                         true -> {
@@ -1059,10 +1058,10 @@ constructor() : GenericViewModel() {
         if (call.conference != null || conferenceInfo != null) {
             val subject = call.conference?.subject ?: conferenceInfo?.subject
             Log.i("$TAG Conference [$subject] found, going to conference fragment")
-            conferenceModel.configureFromCall(call)
+//            conferenceModel.configureFromCall(call)
             goToConferenceEvent.postValue(Event(true))
         } else {
-            conferenceModel.destroy()
+//            conferenceModel.destroy()
             goToCallEvent.postValue(Event(true))
         }
 

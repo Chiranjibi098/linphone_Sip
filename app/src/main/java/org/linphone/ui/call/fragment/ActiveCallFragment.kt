@@ -26,7 +26,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.UiThread
 import androidx.constraintlayout.widget.ConstraintSet
@@ -127,11 +126,6 @@ class ActiveCallFragment : GenericCallFragment() {
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
         return when (findNavController().currentDestination?.id) {
-            R.id.callsListFragment, R.id.transferCallFragment -> {
-                // Holds fragment in place while new fragment slides over it
-                AnimationUtils.loadAnimation(activity, R.anim.hold)
-            }
-
             else -> {
                 super.onCreateAnimation(transit, enter, nextAnim)
             }
@@ -183,14 +177,6 @@ class ActiveCallFragment : GenericCallFragment() {
 
         binding.setBackClickListener {
             (requireActivity() as CallActivity).goToMainActivity()
-        }
-
-        binding.setTransferCallClickListener {
-            if (findNavController().currentDestination?.id == R.id.activeCallFragment) {
-                val action =
-                    ActiveCallFragmentDirections.actionActiveCallFragmentToTransferCallFragment()
-                findNavController().navigate(action)
-            }
         }
 
         binding.setNewCallClickListener {
@@ -332,9 +318,9 @@ class ActiveCallFragment : GenericCallFragment() {
             it.consume {
                 if (findNavController().currentDestination?.id == R.id.activeCallFragment) {
                     Log.i("$TAG Going to conference fragment")
-                    val action =
-                        ActiveCallFragmentDirections.actionActiveCallFragmentToActiveConferenceCallFragment()
-                    findNavController().navigate(action)
+//                    val action =
+//                        ActiveCallFragmentDirections.actionActiveCallFragmentToActiveConferenceCallFragment()
+//                    findNavController().navigate(action)
                 }
             }
         }
